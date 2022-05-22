@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/account}" method="post">
+    <input type="hidden" name="_method" value="put">
+    <input type="hidden" name="id" th:value="${message.id}"><br>
+    姓名：<input type="text" name="name" th:value="${message.name}"><br>
+    薪水：<input type="text" name="balance" th:value="${message.balance}"><br>
+    <input type="submit" value="update">
+</form>
+</body>
+</html>

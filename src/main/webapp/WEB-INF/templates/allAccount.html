@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<img th:src="@{/photo/}+${session.loginUser}+'.jpg'" height="50px" width="50px"/>
+&nbsp;<span th:text="${session.loginUser}"></span>
+<table id="listTable">
+    <tr>
+        <td>id</td>
+        <td>name</td>
+        <td>balance</td>
+        <td>option</td>
+    </tr>
+   <tr th:each="list : ${allList}">
+       <td th:text="${list.id}"></td>
+       <td th:text="${list.name}"></td>
+       <td th:text="${list.balance}"></td>
+       <td><a @click="deleteId" th:href="@{/account/}+${list.id}">删除</a>
+       <a th:href="@{/account/}+${list.id}+'/'+${list.name}+'/'+${list.balance}">修改</a> </td>
+   </tr>
+</table>
+<a th:href="@{/addAccount}"> <input type="button" value ="add"></a>
+<a th:href="@{/logout}"> <input type="button" value ="logout"></a>
+<form th:action="@{/fileUp}" method="post" enctype="multipart/form-data">
+    头像：<input type="file" name="photo"/>
+    <br />
+    <input type="submit" value="上传">
+</form>
+
+    <form id="deleteForm" method="post">
+        <input type="hidden" name="_method" value="delete">
+    </form>
+    <script type="text/javascript" th:src="@{/static/js/vue.js}"></script>
+    <script type="text/javascript">
+        new Vue({
+            el:"#listTable",
+            methods:{
+                deleteId:function (event){
+                    var deleteForm=document.getElementById("deleteForm");
+                    deleteForm.action=event.target.href;
+                    deleteForm.submit();
+                    //取消事件触发超链接的默认跳转行为
+                    event.preventDefault();
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

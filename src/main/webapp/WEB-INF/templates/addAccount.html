@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/account}" method="post" onsubmit="return add()">
+    姓名：<input type="text" name="name" id="name"><br>
+    薪水：<input type="text" name="balance" id="balance"><br>
+    <input type="submit" value="add">
+</form>
+<script type="text/javascript">
+    function add(){
+        var m=document.getElementsByTagName("input");
+       if(m[1].value==''||m[0].value==''){
+                alert("缺少信息");
+                return false
+       }
+       return true;
+
+    }
+</script>
+</body>
+</html>
